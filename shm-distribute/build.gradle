@@ -1,0 +1,10 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation group: 'com.google.guava', name: 'guava', version: '19.0'
+    implementation 'com.auth0:java-jwt:3.8.0'
+    implementation project(":shm-common")
+    implementation project(":shm-core")
+}
