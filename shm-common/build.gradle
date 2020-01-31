@@ -1,0 +1,6 @@
+dependencies {
+    compile('commons-codec:commons-codec:1.10')
+    compile('com.google.code.gson:gson:2.8.5')
+    compile('com.fasterxml.jackson.core:jackson-annotations')
+    compile('ir.ghasemkiani:persiancalendar:2.1.7')
+}
