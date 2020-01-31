@@ -2,3 +2,4 @@ rootProject.name = 'shm'
 
 include("authentication-util")
 include("shm-oauth")
+include("shm-common")
