@@ -7,7 +7,6 @@ import com.shm.authutil.exception.AuthenticationFailedException;
 import com.shm.common.dto.base.ResultDto;
 import com.shm.common.dto.base.ResultErrorCode;
 import com.shm.common.exception.InvalidPhoneNumberException;
-import com.shm.common.exception.WrongCodeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
