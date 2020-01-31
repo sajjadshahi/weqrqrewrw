@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+ساخت اعلان جدید
+    </h4>
+</div>
+<div class="modal-body">
+    <div>
+        <div class="form-group">
+            <label for="">عنوان </label>
+            <input type="text" class="form-control" ng-model="mc.formData.title">
+        </div>
+        <div class="form-group">
+            <label for="">توضیح </label>
+            <input type="text" class="form-control" ng-model="mc.formData.description">
+        </div>
+        <div class="form-group">
+            <label for="">رسانه</label>
+            <div>
+                <ui-select
+                        class="exams-select"
+                        theme="bootstrap"
+                        ng-model="mc.selectedMedium"
+                        on-select="mc.formData.medium = mc.selectedMedium.id"
+                >
+                    <ui-select-match placeholder="انتخاب کنید ...">
+                        {{ $select.selected.title }}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in medium | filter: $select.search"
+                    >
+                        <div>{{ item.title }}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button
+                        ng-repeat="button in severities"
+                        type="button"
+                        ng-click="mc.formData.severity = button.id"
+                        class="btn btn-secondary"
+                        ng-class="{'btn-primary': (mc.formData.severity === button.id)}"
+                >
+                    {{button.title}}
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button
+                        ng-repeat="button in priorities"
+                        type="button"
+                        ng-click="mc.formData.priority = button.id"
+                        class="btn btn-secondary"
+                        ng-class="{'btn-primary': (mc.formData.priority === button.id)}"
+                >
+                    {{button.title}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            ng-click="mc.cancel()"
+    >
+        بستن
+    </button>
+    <button ng-if="!mc.qrCodeId" type="button" class="btn btn-success" ng-click="mc.submit()">
+        ثبت
+    </button>
+</div>

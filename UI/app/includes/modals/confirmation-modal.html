@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{mc.options.title}}
+        <small>{{mc.options.subtitle}}</small>
+    </h4>
+</div>
+<div class="modal-body">
+    {{mc.options.text}}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="mc.cancel()">خیر</button>
+    <button type="button" class="btn btn-success" ng-click="mc.submit()">بله</button>
+</div>

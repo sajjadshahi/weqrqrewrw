@@ -1,0 +1,101 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        ساخت QR Code تجمیعی
+    </h4>
+</div>
+<div class="modal-body">
+    <div ng-if="!mc.qrCodeId">
+        <div class="form-group">
+            <label for="">عنوان (اختیاری)</label>
+            <input type="text" class="form-control" ng-model="mc.formData.title">
+        </div>
+        <div class="form-group">
+            <label for="">پروژه</label>
+            <div>
+                <ui-select
+                        class="exams-select"
+                        theme="bootstrap"
+                        ng-model="mc.selectedProject"
+                        on-select="mc.formData.projectId = mc.selectedProject.id"
+                >
+                    <ui-select-match placeholder="انتخاب کنید ...">
+                        {{ $select.selected.name }}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in mc.projects | filter: $select.search"
+                    >
+                        <div>{{ item.name }}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">دسته‌بندی (اختیاری)</label>
+            <div>
+                <ui-select
+                        class="exams-select"
+                        theme="bootstrap"
+                        ng-model="mc.selectedCategory"
+                        on-select="mc.formData.categoryId = mc.selectedCategory.id"
+                >
+                    <ui-select-match placeholder="انتخاب کنید ...">
+                        {{ $select.selected.name }}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in mc.categories | filter: $select.search"
+                    >
+                        <div>{{ item.name }}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">دامنه</label>
+            <div>
+                <ui-select
+                        class="exams-select"
+                        theme="bootstrap"
+                        ng-model="mc.formData.domain"
+                >
+                    <ui-select-match placeholder="انتخاب کنید ...">
+                        {{ $select.selected }}
+                    </ui-select-match>
+                    <ui-select-choices
+                            repeat="item in mc.domains | filter: $select.search"
+                    >
+                        <div>{{ item }}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">تعداد</label>
+            <div>
+                <input type="number" class="form-control" ng-model="mc.formData.count">
+            </div>
+        </div>
+        <div ng-if="mc.qrCodeId">
+            <img
+                    style="width: 100%"
+                    ng-src="getQRCodeByIdUrl(mc.qrCodeId)"
+            />
+            <h4 class="text-center">{{mc.qrCodeText}}</h4>
+        </div>
+        <div class="alert alert-info" ng-if="mc.isCreating">
+            سیستم در حال ساخت کدها است.
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                ng-click="mc.cancel()"
+        >
+            بستن
+        </button>
+        <button ng-disabled="mc.isCreating" type="button" class="btn btn-success" ng-click="mc.submit()">
+            ثبت
+        </button>
+    </div>
+      

@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card__header">
+        <h2>گزارشات فراخوانی‌ها</h2>
+        <br>
+    </div>
+
+    <div class="card__body">
+        <div>
+            <table
+                    class="table table-condensed table-striped table-bordered ver-middle"
+                    ng-table="vm.logs"
+                    id="projects_table"
+                    show-filter="true"
+            >
+                <tr ng-repeat="row in $data" class="text-center">
+                    <td data-title="'ID'">{{ row.id }}</td>
+                    <td data-title="'متن'">{{ row.text }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

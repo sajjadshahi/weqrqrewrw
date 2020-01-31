@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card__header">
+        <h2>لیست اعلان‌ها</h2>
+        <br>
+    </div>
+
+    <br>
+    <button class="btn btn-primary" ng-click="vm.createNewNotification()">اعلان جدید</button>
+    <br>
+    <div class="card__body">
+        <div>
+            <table
+                    class="table table-condensed table-striped ver-middle"
+                    ng-table="vm.notifications"
+                    id="codes_table"
+                    show-filter="true"
+            >
+                <tr ng-repeat="row in $data" class="text-center">
+                    <td data-title="'ID'">{{ row.id }}</td>
+                    <td data-title="'عنوان'">{{ row.title }}</td>
+                    <td data-title="'شرح'">{{ row.description }}
+                    </td>
+                    <td data-title="'شدت'">{{ getTitleById(severities, row.severity) }}</td>
+                    <td data-title="'اولویت'">{{ getTitleById(priorities, row.priority) }}</td>
+                    <td data-title="'رسانه'">{{ getTitleById(medium, row.medium) }}</td>
+                    <td data-title="'عملیات'" class="table-operations">
+                        <a ng-click="vm.performNotification(row)" target="_blank"
+                           uib-tooltip="اعمال اعلان">
+                            <i class="zmdi zmdi-check"></i>
+                        </a><a ng-click="vm.cancelNotification(row)" target="_blank"
+                           uib-tooltip="لغو اعلان">
+                            <i class="zmdi zmdi-power"></i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

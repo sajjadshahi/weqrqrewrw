@@ -1,0 +1,57 @@
+<div class="navigation__header">
+  <i class="zmdi zmdi-long-arrow-left" data-mae-action="block-close"></i>
+</div>
+<!--
+<div class="navigation__toggles">
+  <a
+    href=""
+    class="active"
+    data-mae-action="block-open"
+    data-mae-target="#notifications"
+    data-toggle="tab"
+    data-target="#notifications__messages"
+  >
+    <i class="zmdi zmdi-email"></i>
+  </a>
+  <a
+    href=""
+    data-mae-action="block-open"
+    data-mae-target="#notifications"
+    data-toggle="tab"
+    data-target="#notifications__updates"
+  >
+    <i class="zmdi zmdi-notifications"></i>
+  </a>
+  <a
+    href=""
+    data-mae-action="block-open"
+    data-mae-target="#notifications"
+    data-toggle="tab"
+    data-target="#notifications__tasks"
+  >
+    <i class="zmdi zmdi-playlist-plus"></i>
+  </a>
+</div>-->
+
+<div class="navigation__menu c-overflow">
+  <ul ng-if="vm.isUser || true">
+    <li>
+      <a ui-sref="dash.users"><i class="zmdi zmdi-accounts"></i> مدیریت کاربران </a>
+    </li>
+    <li>
+      <a><i class="zmdi zmdi-accounts-list"></i> مدیریت گروه‌ها </a>
+    </li>
+    <li>
+      <a ui-sref="dash.notifications"><i class="zmdi zmdi-notifications-active"></i> اعلان‌های فعلی </a>
+    </li>
+    <li>
+      <a ui-sref="dash.logs"><i class="zmdi zmdi-assignment-o"></i> گزارشات فراخوانی </a>
+    </li>
+    <li>
+      <a ui-sref="dash.medium"><i class="zmdi zmdi-devices"></i> مدیریت رسانه‌ها </a>
+    </li>
+    <li>
+      <a><i class="zmdi zmdi-settings"></i> تنظیمات  </a>
+    </li>
+  </ul>
+</div>

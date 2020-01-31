@@ -1,0 +1,183 @@
+<h4 class="form-box-title">
+    {{item.title}} <span class="form-force star-form"
+                        ng-show="item.isRequired">*</span>
+<span ng-if="item.description">({{item.description}})</span>
+</h4>
+<div class="form-border-box">
+    <!--ng-init="item.value = []"-->
+    <div class="border-radios"
+         ng-class="{'form-confirm':(item.isRequired && (item.value[0] !== null && item.value[0] !== undefined) && examInfoForm.$submitted) , 'form-error':(examInfoForm.$submitted && item.isRequired && (item.value[0] == null && item.value[0] == undefined))}"
+         ng-if="item.type==1 || item.type==2">
+        <div class="row">
+            <div name="field_{{item.id}}" ng-class="{'col col-lg-4 col-md-4 col-sm-6 col-xs-12':item.type==1,
+                         'col col-lg-12 col-md-12 col-sm-12 col-xs-12':item.type==2}"
+                 ng-repeat="option in item.options">
+                <fieldset class="ticket-feildset">
+                    <div class="radio-holder">
+                        <input type="radio"
+                               ng-value="{{option.id}}"
+                               ng-model="item.value[0]"
+                               ng-disabled="item.isDisabled">
+                        <label><span></span></label>
+                        {{option.title}}
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="border-checkboxs"
+         ng-class="{'form-confirm':(item.isRequired && item.isValid && examInfoForm.$submitted) , 'form-error':(examInfoForm.$submitted && (!item.isValid))}"
+         ng-if="item.type==3 || item.type==4">
+        <div name="field_{{item.id}}" class="row" ng-init="initializeCheckbox(item)">
+            <div ng-class="{'col col-lg-4 col-md-4 col-sm-6 col-xs-12':item.type==3,
+                         'col col-lg-12 col-md-12 col-sm-12 col-xs-12':item.type==4}"
+                 ng-repeat="option in item.options">
+                <fieldset class="ticket-feildset">
+                    <div class="checkbox-holder checkbox-nik">
+                        <input type="checkbox"
+                               name="field_{{item.id}}"
+                               value="{{option.id}}"
+                               ng-model="option.isSelected"
+                               ng-change="requiredCheckbox(item)"
+                               ng-disabled="item.isDisabled"
+                               ng-required="requiredCheckbox(item)">
+                        <label><span></span></label>
+                        {{option.title}}
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <!--//string-->
+    <fieldset class="ticket-feildset"
+              ng-if="item.type==5"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['fi eld_{{item.id}}'].$isEmpty()) , 'form-error':(examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+        <input ng-required="item.isRequired"
+               ng-disabled="item.isDisabled"
+               name="field_{{item.id}}" type="text" ng-model="item.value[0]" />
+        <i ng-class="{'fa fa-check': (examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) ,
+                            'fa fa-times': (examInfoForm['field_{{item.id}}'].$invalid && examInfoForm.$submitted)}"></i>
+    </fieldset>
+    <!--//number-->
+    <fieldset class="ticket-feildset"
+              ng-if="item.type==6"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'form-error':(examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+
+        <input ng-required="item.isRequired" class="num-input" name="field_{{item.id}}"
+               type="text" ng-disabled="item.isDisable" data-fraction="{{item.fraction}}"
+               ng-model="item.value[0]" />
+        <i ng-class="{'fa fa-check': (examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) ,
+                            'fa fa-times': (examInfoForm['field_{{item.id}}'].$invalid && examInfoForm.$submitted)}"></i>
+    </fieldset>
+    <!--//date-->
+    <fieldset class="row ticket-feildset date-select-container"
+              ng-if="item.type==7">
+        <adm-dtp disable="item.isDisable"
+                 options="{dtpType: 'date', format: 'YYYY/MM/DD'}"
+                 full-data="item.value[1]" ng-model="item.value[0]"></adm-dtp>
+    </fieldset>
+    <fieldset class="row ticket-feildset date-select-container"
+              ng-if="item.type==18">
+        <adm-dtp disable="item.isDisable"
+                 full-data="item.value[1]" ng-model="item.value[0]"></adm-dtp>
+    </fieldset>
+    <!--//money-->
+    <fieldset class="ticket-feildset currencyFieldset"
+              ng-if="item.type == 8"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+        <input name="field_{{item.id}}" type="text" ng-model="item.value[0]"
+               ng-blur="dynamicItemBlur(item)"
+               class="currencyShow"
+               ng-required="item.isRequired"
+               ng-disabled="item.isDisabled"
+               placeholder="" />
+        <span class="currency-title">تومان</span>
+        <i ng-class="{'fa fa-check': (examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'fa fa-times': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid)}"></i>
+    </fieldset>
+    <fieldset ng-if="item.type==9" class="ticket-feildset folowUp-feildset"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+
+        <textarea ng-disabled="item.isDisabled" name="field_{{item.id}}"
+                  ng-required="item.isRequired"
+                  ng-model="item.value[0]"></textarea>
+        <i ng-class="{'fa fa-check': (examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'fa fa-times': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid)}"></i>
+    </fieldset>
+
+    <fieldset ng-if="item.type==10" class="ticket-feildset folowUp-feildset"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+        <!--        visible-lg visible-md visible-sm-->
+        <ui-select style="bottom: 1px;"
+                   class=""
+                   theme="bootstrap"
+                   ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()), 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid)}"
+                   name="field_{{item.id}}"
+                   on-select="item.value[0 ] = item.tempVal.id"
+                   ng-required="item.isRequired"
+                   ng-disabled="item.isDisabled || item.options.length <= 0"
+                   ng-model="item.tempVal">
+            <ui-select-match>
+                {{$select.selected.title}}
+            </ui-select-match>
+            <ui-select-choices repeat="item in item.options | filter: $select.search">
+                <div>{{item.title}}</div>
+            </ui-select-choices>
+        </ui-select>
+        <!-- <select class="hidden-lg hidden-md hidden-sm col-xs-12"
+                 name="field_{{item.id}}"
+                 ng-disabled="item.isDisabled"
+                 ng-model="item.value[0]"
+                 ng-required="item.isRequired" ng-options="item.title for item in item.options">
+             <option value="" disabled selected>
+                 &lt;!&ndash;{{mainData.titles.selectUserOther.text}}&ndash;&gt;
+             </option>
+         </select>-->
+    </fieldset>
+    <fieldset style="position: relative;" ng-if="item.type == 12"
+              class="ticket-feildset folowUp-feildset"
+              ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()) , 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid) }">
+        <span class="loading-spinner-select" ng-show="item.isLoading">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+        </span>
+        <ui-select style="bottom: 1px;"
+                   theme="bootstrap"
+                   ng-class="{'form-confirm':(examInfoForm['field_{{item.id}}'].$valid && !examInfoForm['field_{{item.id}}'].$isEmpty()), 'form-error': (examInfoForm.$submitted && examInfoForm['field_{{item.id}}'].$invalid)}"
+                   name="field_{{item.id}}"
+                   on-select="item.value[0] = item.tempVal.id"
+                   ng-required="item.isRequired"
+                   ng-disabled="item.isDisabled"
+                   ng-model="item.tempVal">
+            <ui-select-match placeholder="{{mainData.titles.headerSearch.text}}">
+                {{$select.selected.title}}
+            </ui-select-match>
+            <ui-select-choices ui-disable-choice="item.id < 0"
+                               refresh="refreshSelectDynamicFields(item, $select.search)"
+                               refresh-delay="300"
+                               repeat="item in item.options">
+                <div>{{item.title}}</div>
+            </ui-select-choices>
+        </ui-select>
+        <i class="fa fa-close text-danger" style="position: absolute; left: -20px; top: 7px; font-size: 15px;"
+           ng-if="item.tempVal && !item.isRequired"
+           ng-click="item.value[0] = null; item.tempVal = null;"></i>
+    </fieldset>
+    <fieldset ng-if="item.type == 11">
+        <div class="inlineEditorHolder">
+            <div id="DYCK_{{item.id}}" initialize-editor
+                 ng-bind-html="item.value[0] | trustAsHtml"></div>
+        </div>
+    </fieldset>
+    <fieldset ng-if="item.type == 19" class="pos-rel"><span class="helpIcon text-primary" style="position: absolute; left: -20px; font-size: 17px;" ng-if="item.value.help" ng-click="openPicModal(item.value.help, item.title, null, false, true)">
+            <i class="fa fa-question-circle"></i>
+        </span>
+        <div class="UploaderPlace userProfileUpload {{item.value.circled ? 'uploaderPlaceCircle' : ''}}" ng-click="uploaderPlace(item.value)">
+            <img ng-src="{{item.value.picture || item.value.placeholder}}" />
+            <br />
+            <span class="label">
+                <i class="fa fa-upload"></i> {{item.value.description}}
+            </span>
+        </div>
+    </fieldset>
+    <div ng-if="item.compareItem && !item.compareItem.hidden" class="compare-icon">
+        <i class="fa fa-exchange" ng-click="compareValues(item)"></i>
+    </div>
+</div>

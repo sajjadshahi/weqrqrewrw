@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card__header">
+        <h2>اطلاعات پرونده پزشکی
+            <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
+                و متون
+            </small>
+        </h2>
+    </div>
+
+    <div class="card__body">
+        <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+            <strong>نکته مهم در پر کردن اطلاعات</strong>
+            نکته مهم در پر کردن اطلاعات نکته مهم در پر کردن اطلاعات نکته مهم در پر کردن اطلاعات نکته مهم در پر کردن
+            اطلاعات
+        </div>
+        <div class="form-box" ng-init="vm.initializeDynamicItem(item)"
+             ng-repeat="item in vm.userFields"
+             ng-include="'app/includes/dynamicInput.html'"></div>
+        <div class="text-center">
+            <button ng-click="vm.saveFields()" class="btn btn-success ">
+                <i class="zmdi zmdi-check-circle-u"></i>
+                ذخیره اطلاعات
+            </button>
+        </div>
+
+    </div>
+</div>

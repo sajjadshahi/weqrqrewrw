@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card__header">
+        <h2>دسته‌بندی‌ها</h2>
+        <br>
+        <button class="btn btn-primary" ng-click="vm.createNewProject()"> دسته‌بندی جدید</button>
+    </div>
+
+    <div class="card__body">
+        <div>
+            <table
+                    class="table table-condensed table-striped table-bordered ver-middle"
+                    ng-table="vm.categories"
+                    id="categories_table"
+                    show-filter="true"
+            >
+                <tr ng-repeat="row in $data" class="text-center">
+                    <td data-title="'ID'">{{ row.id }}</td>
+                    <td data-title="'عنوان'" filter="{name: 'text'}">{{ row.name }}</td>
+                    <td data-title="'شرح'" filter="{description: 'text'}">{{ row.description }}</td>
+                    <td data-title="'تاریخ ایجاد'">{{ row.createdAt }}</td>
+                    <td data-title="'تعداد QR'">{{ row.qrCount }}</td>
+                    <td data-title="'عملیات'">
+                        <i class="zmdi zmdi-collection-add" uib-tooltip="مشاهده QR Code ها"
+                           ng-click="vm.filterQRByCategory(row)"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

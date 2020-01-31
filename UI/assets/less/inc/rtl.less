@@ -1,0 +1,28 @@
+body{
+    direction: rtl;
+}
+
+.ui-select-container{
+    .ui-select-match{
+        i.caret{
+            left: 10px;
+            right: unset;
+        }
+        > .btn{
+            text-align: right !important;
+            padding-right: 7px;
+        }
+    }
+    .ui-select-placeholder, .ui-select-match-text{
+        position: relative;
+        top: 7px;
+    }
+}
+input{
+    &:focus{
+        border-color: #31424b !important;
+    }
+}
+.btn{
+    color: #fff;
+}
