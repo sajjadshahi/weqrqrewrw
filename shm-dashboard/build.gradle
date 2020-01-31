@@ -1,0 +1,10 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    implementation project(":shm-common")
+    implementation project(":shm-core")
+    implementation project(":authentication-util")
+}
