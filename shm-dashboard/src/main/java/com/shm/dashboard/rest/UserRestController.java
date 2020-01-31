@@ -47,12 +47,6 @@ public class UserRestController {
         } catch (BadInfoException e) {
             e.printStackTrace();
             return new LoginResultDto(false, "bad info.", "");
-        } catch (UnAuthorizedAccessException e) {
-            e.printStackTrace();
-            return new LoginResultDto(false, "unauthorized access.", "");
-        } catch (IncorrectCodeException e) {
-            e.printStackTrace();
-            return new LoginResultDto(false, "incorrect code.", "");
         } catch (UserNotFoundException e) {
             e.printStackTrace();
             return new LoginResultDto(false, "user not found.", "");

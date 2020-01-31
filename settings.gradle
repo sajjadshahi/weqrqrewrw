@@ -1,5 +1,8 @@
 rootProject.name = 'shm'
 
+include("shm-core")
 include("authentication-util")
 include("shm-oauth")
+include("shm-dashboard")
 include("shm-common")
+include("shm-distribute")
